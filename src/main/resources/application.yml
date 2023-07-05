@@ -3,7 +3,7 @@ server:
   port: 8080
 # 整合mybatis
 mybatis:
-  type-aliases-package: com.out.pojo
+  type-aliases-package: com.example.rs.pojo
   mapper-locations: classpath:mybatis/mapper/*.xml
   config-location: classpath:mybatis-config.xml
 # Spring配置
@@ -13,11 +13,11 @@ spring:
     resources:
       static-locations: classpath:/static/,classpath:/public/
   # 安全访问账户名密码
-  security:
-    user:
-      name: lht
-      password: 123456
-      roles: admin
+#  security:
+#    user:
+#      name: lht
+#      password: 123456
+#      roles: admin
   # 关闭thymeleaf缓存
   thymeleaf:
     cache: false

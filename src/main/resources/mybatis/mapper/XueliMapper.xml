@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.rs.dao.XueliMapper">
+
+    <resultMap id="xueliResultMap" type="xueli">
+        <result property="yno" column="F_yno"/>
+        <result property="school" column="F_school"/>
+        <result property="language" column="F_waiyuqingkuang"/>
+        <result property="graduateDate" column="F_biyeshijian"/>
+        <result property="xueLi" column="F_xueli"/>
+        <result property="major" column="F_zhuanye"/>
+    </resultMap>
+
+    <!--    <select id="queryUser" resultMap="userResultMap">-->
+    <!--        select  * from tb_user where user_name = #{userName} and password = #{password}-->
+    <!--    </select>-->
+
+    <!--    <insert id="addUser" parameterType="User">-->
+    <!--        insert into tb_user(user_name, password, status) values(#{userName}, #{password}, #{status})-->
+    <!--    </insert>-->
+
+    <!--    <update id="updateUser" parameterType="User">-->
+    <!--        update tb_user set user_name = #{userName}, password = #{password}, status = #{status} where id = #{id}-->
+    <!--    </update>-->
+
+    <!--    <delete id="deleteUserById" parameterType="User">-->
+    <!--        delete from tb_user where id = #{id}-->
+    <!--    </delete>-->
+</mapper>

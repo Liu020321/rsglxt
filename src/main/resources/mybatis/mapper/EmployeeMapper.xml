@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.rs.dao.EmployeeMapper">
+
+    <resultMap id="employeeResultMap" type="employee">
+        <result property="yno" column="F_yno"/>
+        <result property="bno" column="F_bno"/>
+        <result property="id" column="F_id"/>
+        <result property="name" column="F_yname"/>
+        <result property="sex" column="F_sex"/>
+        <result property="gangWei" column="F_gangwei"/>
+        <result property="zhiCheng" column="F_zhicheng"/>
+        <result property="workDate" column="F_canjiagongzuoshijian"/>
+    </resultMap>
+
+    <!--    <select id="queryUser" resultMap="userResultMap">-->
+    <!--        select  * from tb_user where user_name = #{userName} and password = #{password}-->
+    <!--    </select>-->
+
+    <!--    <insert id="addUser" parameterType="User">-->
+    <!--        insert into tb_user(user_name, password, status) values(#{userName}, #{password}, #{status})-->
+    <!--    </insert>-->
+
+    <!--    <update id="updateUser" parameterType="User">-->
+    <!--        update tb_user set user_name = #{userName}, password = #{password}, status = #{status} where id = #{id}-->
+    <!--    </update>-->
+
+    <!--    <delete id="deleteUserById" parameterType="User">-->
+    <!--        delete from tb_user where id = #{id}-->
+    <!--    </delete>-->
+</mapper>
