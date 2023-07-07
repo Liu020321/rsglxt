@@ -10,10 +10,15 @@ import lombok.NoArgsConstructor;
 public class Employee {
     String yno;
     String bno;
+    String F_bname;
     String id;
     String name;
     String sex;
     String gangWei;
     String zhiCheng;
     String workDate;
+    String ynos;
+    String xue;
+    String hun;
+    String gang;
 }

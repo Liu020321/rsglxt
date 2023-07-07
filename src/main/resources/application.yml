@@ -31,9 +31,9 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     # serverTimezone=UTC&    时区问题，仅在8.0以上版本出现
-    url: jdbc:mysql://159.138.46.254:3306/rsglxt?useUnicode=true&useSSL=false&characterEncoding=utf-8
+    url: jdbc:mysql://localhost:3306/rsglxt?useUnicode=true&useSSL=false&characterEncoding=utf-8
     username: root
-    password: 12345678
+    password: 20204112
     # 配置Druid连接池
     type: com.alibaba.druid.pool.DruidDataSource
 

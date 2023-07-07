@@ -14,4 +14,5 @@ public class Xueli {
     String graduateDate;
     String xueLi;
     String major;
+    String ynos;
 }

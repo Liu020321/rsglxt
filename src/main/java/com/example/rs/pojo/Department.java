@@ -12,4 +12,5 @@ public class Department {
     String bno;//部门编号
     String bname;//部门姓名
     String fuzeren;//部门负责人
+    String bnos;
 }

@@ -28,7 +28,33 @@
 <!-- Wrapper Start -->
 <div class="wrapper">
     <!-- Sidebar  -->
-    <div th:replace="~{commons/commons::sidebar}"></div>
+    <div class="iq-sidebar" th:fragment="sidebar">
+        <div class="iq-sidebar-logo d-flex justify-content-between">
+            <a th:href="@{index.html}">
+                <img th:src="@{images/logo.gif}" class="img-fluid" alt="">
+                <span>人事管理</span>
+            </a>
+            <div class="iq-menu-bt-sidebar">
+                <div class="iq-menu-bt align-self-center">
+                    <div class="wrapper-menu">
+                        <div class="main-circle"><i class="ri-arrow-left-s-line"></i></div>
+                        <div class="hover-circle"><i class="ri-arrow-right-s-line"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="sidebar-scrollbar">
+            <nav class="iq-sidebar-menu">
+                <ul id="iq-sidebar-toggle" class="iq-menu">
+
+                    <li>
+                        <a href="#mailbox" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-mail-line"></i><span>个人信息</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="p-3"></div>
+        </div>
+    </div>
     <!-- TOP Nav Bar -->
     <div th:replace="~{commons/commons::topnavbar}"></div>
     <!-- Responsive Breadcrumb End-->
@@ -195,9 +221,9 @@
                                                         <img src="images/user/11.png" alt="profile-img"
                                                              class="avatar-130 img-fluid"/>
                                                     </div>
-                                                    <div class="profile-detail d-flex align-items-center"  v-for="(item,index) in employee" :key="index">
-                                                        <h3>{{item.name}}</h3>
-                                                        <p class="m-0 pl-3">---{{item.zhiCheng}}</p>
+                                                    <div class="profile-detail d-flex align-items-center"  v-for="(item1,index) in employee" :key="index">
+                                                        <h3>{{item1.name}}</h3>
+                                                        <p class="m-0 pl-3">{{item1.zhiCheng}}</p>
                                                     </div>
                                                 </div>
                                             </div>

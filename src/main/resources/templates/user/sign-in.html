@@ -97,8 +97,7 @@
 <!-- Sign in END -->
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<div th:replace="~{commons/commons::js}"></div>
 
 <script>
     new Vue({
@@ -117,18 +116,16 @@
         methods: {
 
             login() {
+                console.log(this.user)
                 axios({
                     method: "post",
-                    url: "http://localhost:8080/user/queryUser",
-                    data: this.user,
+                    url: "http://localhost:8080/user/queryUser?userName=" + this.user.userName + "&password=" + this.user.password,
                 }).then(resp => {
                     console.log(resp.data);
-                    if (resp.data === "success") {
-                        console.log("登陆成功");
-                        location.href = "http://localhost:8080/"
+                    if (resp.data === "admin") {
+                        window.location.href="http://localhost:8080/department";
                     } else {
-                        alert("账户或密码错误，请重试")
-                        location.href = "http://localhost:8080/login"
+                        window.location.href="http://localhost:8080/person?yno="+this.user.userName;
                     }
 
 
@@ -138,33 +135,5 @@
     })
 </script>
 
-<script th:src="@{js/jquery.min.js}"></script>
-<script th:src="@{js/popper.min.js}"></script>
-<script th:src="@{js/bootstrap.min.js}"></script>
-<!-- Appear JavaScript -->
-<script th:src="@{js/jquery.appear.js}"></script>
-<!-- Countdown JavaScript -->
-<script th:src="@{js/countdown.min.js}"></script>
-<!-- Counterup JavaScript -->
-<script th:src="@{js/waypoints.min.js}"></script>
-<script th:src="@{js/jquery.counterup.min.js}"></script>
-<!-- Wow JavaScript -->
-<script th:src="@{js/wow.min.js}"></script>
-<!-- Apexcharts JavaScript -->
-<script th:src="@{js/apexcharts.js}"></script>
-<!-- Slick JavaScript -->
-<script th:src="@{js/slick.min.js}"></script>
-<!-- Select2 JavaScript -->
-<script th:src="@{js/select2.min.js}"></script>
-<!-- Owl Carousel JavaScript -->
-<script th:src="@{js/owl.carousel.min.js}"></script>
-<!-- Magnific Popup JavaScript -->
-<script th:src="@{js/jquery.magnific-popup.min.js}"></script>
-<!-- Smooth Scrollbar JavaScript -->
-<script th:src="@{js/smooth-scrollbar.js}"></script>
-<!-- Chart Custom JavaScript -->
-<script th:src="@{js/chart-custom.js}"></script>
-<!-- Custom JavaScript -->
-<script th:src="@{js/custom.js}"></script>
 </body>
 </html>

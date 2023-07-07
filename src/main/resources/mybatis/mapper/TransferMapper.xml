@@ -8,24 +8,46 @@
         <result property="dno" column="F_dno"/>
         <result property="yno" column="F_yno"/>
         <result property="bno" column="F_bno"/>
+        <result property="yuangangWei" column="F_yuangangwei"/>
         <result property="gangWei" column="F_diaodonggangwei"/>
         <result property="reason" column="F_diaodongyuanyin"/>
         <result property="transferDate" column="F_diaodongshijian"/>
     </resultMap>
+    <select id="queryTransfer" resultMap="transferResultMap">
+        SELECT t_renyuandiaodong.F_dno,
+               t_renyuandiaodong.F_yno,
+               t_yuangong.F_yname,
+               t_department.F_bname,
+               t_renyuandiaodong.F_yuangangwei,
+               t_renyuandiaodong.F_diaodonggangwei,
+               t_renyuandiaodong.F_diaodongyuanyin,
+               t_renyuandiaodong.F_diaodongshijian
+        FROM rsglxt.t_renyuandiaodong
+                 JOIN t_department ON t_renyuandiaodong.F_bno = t_department.F_bno
+                 JOIN t_yuangong ON t_renyuandiaodong.F_yno = t_yuangong.F_yno;
+    </select>
 
-    <!--    <select id="queryUser" resultMap="userResultMap">-->
-    <!--        select  * from tb_user where user_name = #{userName} and password = #{password}-->
-    <!--    </select>-->
+    <insert id="insertTransfer" parameterType="transfer">
+        INSERT INTO t_renyuandiaodong (F_dno, F_yno, F_bno, F_yuangangwei, F_diaodonggangwei, F_diaodongyuanyin, F_diaodongshijian)
+        VALUES (#{dno}, #{yno}, #{bno}, #{yuangangWei}, #{gangWei}, #{reason}, #{transferDate});
+    </insert>
 
-    <!--    <insert id="addUser" parameterType="User">-->
-    <!--        insert into tb_user(user_name, password, status) values(#{userName}, #{password}, #{status})-->
-    <!--    </insert>-->
+    <update id="updateTransfer" parameterType="transfer">
+        UPDATE t_renyuandiaodong
+        SET F_dno = #{dno},
+            F_yno = #{yno},
+            F_bno = #{bno},
+            F_yuangangwei = #{yuangangWei},
+            F_diaodonggangwei = #{gangWei},
+            F_diaodongyuanyin = #{reason},
+            F_diaodongshijian = #{transferDate}
+        WHERE F_dno = #{dnos};
+    </update>
 
-    <!--    <update id="updateUser" parameterType="User">-->
-    <!--        update tb_user set user_name = #{userName}, password = #{password}, status = #{status} where id = #{id}-->
-    <!--    </update>-->
+    <delete id="deleteTransfer" parameterType="transfer">
+        DELETE
+        FROM t_renyuandiaodong
+        WHERE F_dno = #{dno};
+    </delete>
 
-    <!--    <delete id="deleteUserById" parameterType="User">-->
-    <!--        delete from tb_user where id = #{id}-->
-    <!--    </delete>-->
 </mapper>

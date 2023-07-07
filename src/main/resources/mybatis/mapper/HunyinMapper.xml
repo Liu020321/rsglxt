@@ -13,19 +13,17 @@
         <result property="wifeWork" column="F_airenzhiye"/>
     </resultMap>
 
-    <!--    <select id="queryUser" resultMap="userResultMap">-->
-    <!--        select  * from tb_user where user_name = #{userName} and password = #{password}-->
-    <!--    </select>-->
+        <select id="queryHunyin" resultMap="hunyinResultMap">
+            select  * from rsglxt.t_hunyin where t_hunyin.F_yno = #{yno}
+        </select>
 
-    <!--    <insert id="addUser" parameterType="User">-->
-    <!--        insert into tb_user(user_name, password, status) values(#{userName}, #{password}, #{status})-->
-    <!--    </insert>-->
-
-    <!--    <update id="updateUser" parameterType="User">-->
-    <!--        update tb_user set user_name = #{userName}, password = #{password}, status = #{status} where id = #{id}-->
-    <!--    </update>-->
-
-    <!--    <delete id="deleteUserById" parameterType="User">-->
-    <!--        delete from tb_user where id = #{id}-->
-    <!--    </delete>-->
+    <update id="updateHunyin" parameterType="hunyin">
+        update rsglxt.t_hunyin set
+        F_hunyinzhuangkuang = #{status},
+        F_airenname = #{wife},
+        F_jiehunshijian = #{memoryDate},
+        F_kids = #{kids},
+        F_airenzhiye = #{wifeWork}
+        where F_yno = #{yno}
+    </update>
 </mapper>

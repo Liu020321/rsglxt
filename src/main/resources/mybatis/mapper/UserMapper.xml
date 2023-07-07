@@ -11,18 +11,18 @@
     </resultMap>
 
     <select id="queryUser" resultMap="userResultMap">
-        select  * from tb_user where user_name = #{userName} and password = #{password}
+        select  * from t_user where t_user.t_username = #{userName} and t_password = #{password}
     </select>
 
     <insert id="addUser" parameterType="User">
-        insert into tb_user(user_name, password, status) values(#{userName}, #{password}, #{status})
+        insert into t_user(t_username, t_password, t_admin) values(#{userName}, #{password}, 0)
     </insert>
 
-    <update id="updateUser" parameterType="User">
-        update tb_user set user_name = #{userName}, password = #{password}, status = #{status} where id = #{id}
-    </update>
+<!--    <update id="updateUser" parameterType="User">-->
+<!--        update tb_user set user_name = #{userName}, password = #{password}, status = #{status} where id = #{id}-->
+<!--    </update>-->
 
-    <delete id="deleteUserById" parameterType="User">
-        delete from tb_user where id = #{id}
-    </delete>
+<!--    <delete id="deleteUserById" parameterType="User">-->
+<!--        delete from tb_user where id = #{id}-->
+<!--    </delete>-->
 </mapper>

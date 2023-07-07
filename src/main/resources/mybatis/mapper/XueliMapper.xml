@@ -13,19 +13,19 @@
         <result property="major" column="F_zhuanye"/>
     </resultMap>
 
-    <!--    <select id="queryUser" resultMap="userResultMap">-->
-    <!--        select  * from tb_user where user_name = #{userName} and password = #{password}-->
-    <!--    </select>-->
+    <select id="queryXueli" resultMap="xueliResultMap">
+        select *
+        from rsglxt.t_xueli
+        where t_xueli.F_yno = #{yno}
+    </select>
 
-    <!--    <insert id="addUser" parameterType="User">-->
-    <!--        insert into tb_user(user_name, password, status) values(#{userName}, #{password}, #{status})-->
-    <!--    </insert>-->
-
-    <!--    <update id="updateUser" parameterType="User">-->
-    <!--        update tb_user set user_name = #{userName}, password = #{password}, status = #{status} where id = #{id}-->
-    <!--    </update>-->
-
-    <!--    <delete id="deleteUserById" parameterType="User">-->
-    <!--        delete from tb_user where id = #{id}-->
-    <!--    </delete>-->
+    <update id="updateXueli" parameterType="xueli">
+        update rsglxt.t_xueli
+        set F_school = #{school},
+            F_waiyuqingkuang = #{language},
+            F_biyeshijian = #{graduateDate},
+            F_xueli = #{xueLi},
+            F_zhuanye = #{major}
+        where F_yno = #{yno}
+    </update>
 </mapper>

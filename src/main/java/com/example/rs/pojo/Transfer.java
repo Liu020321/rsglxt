@@ -11,7 +11,11 @@ public class Transfer {
     String dno;
     String yno;
     String bno;
+    String F_yname;
+    String F_bname;
+    String yuangangWei;
     String gangWei;
     String reason;
     String transferDate;
+    String dnos;
 }

@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>历史分析</title>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <!-- Favicon -->
     <link rel="shortcut icon" th:href="@{images/favicon.ico}"/>
@@ -30,14 +28,14 @@
 <!-- Wrapper Start -->
 <div class="wrapper">
     <!-- Sidebar  -->
-    <div th:replace="~{commons/commons::sidebar}"></div>
+    <div th:replace="~{commons/commons::sidebar(active1='de',active2='employee.html')}"></div>
     <!-- TOP Nav Bar -->
     <div th:replace="~{commons/commons::topnavbar}"></div>
     <!-- TOP Nav Bar END -->
     <!-- Responsive Breadcrumb End-->
     <!-- Page Content  -->
     <div id="content-page" class="content-page">
-        <div class="container-fluid">
+        <div class="container-fluid" id="employ">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="iq-card">
@@ -49,30 +47,135 @@
                         <div class="iq-card-body">
                             <div class="table-responsive">
                                 <div class="row justify-content-between">
-                                    <div class="col-sm-12 col-md-6">
-                                        <div id="user_list_datatable_info" class="dataTables_filter">
-                                            <form class="mr-3 position-relative">
-                                                <div class="form-group mb-0">
-                                                    <input type="search" class="form-control" id="exampleInputSearch" placeholder="搜索..." aria-controls="user-list-table">
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6">
+                                    <div class="col-sm-12">
                                         <div class="user-list-files d-flex float-right">
-                                            <a class="iq-bg-primary" href="javascript:void();" >
-                                                打印
-                                            </a>
-                                            <a class="iq-bg-primary" href="javascript:void();">
-                                                表格
-                                            </a>
-                                            <a class="iq-bg-primary" href="javascript:void();">
-                                                Pdf
-                                            </a>
+                                            <div class="bootstrap-modal">
+                                                <button type="button" class="btn btn-primary btn-sm mr-2"
+                                                        data-toggle="modal" data-target="#basicModal">
+                                                    添加员工
+                                                </button>
+                                                <div class="modal fade col-lg-12" id="basicModal">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">添加员工信息</h5>
+                                                                <button type="button" class="close"
+                                                                        data-dismiss="modal"><span>&times;</span>
+                                                                </button>
+                                                            </div>
+
+                                                            <div class="modal-body">
+                                                                <section>
+                                                                    <div>
+                                                                        <form>
+                                                                            <div class="form-group row align-items-center">
+                                                                                <div class="col-md-12">
+                                                                                    <div class="profile-img-edit">
+                                                                                        <img class="profile-pic"
+                                                                                             src="images/user/11.png"
+                                                                                             alt="profile-pic">
+                                                                                        <div class="p-image">
+                                                                                            <i class="ri-pencil-line upload-button"></i>
+                                                                                            <input class="file-upload"
+                                                                                                   type="file"
+                                                                                                   accept="image/*"/>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class=" row align-items-center">
+                                                                                <div class="form-group col-sm-6">
+                                                                                    <label for="fname">员工编号:</label>
+                                                                                    <input type="text"
+                                                                                           class="form-control"
+                                                                                           id="fname"
+                                                                                           value="A001" v-model="emp.yno">
+                                                                                </div>
+                                                                                <div class="form-group col-sm-6">
+                                                                                    <label for="lname">员工姓名:</label>
+                                                                                    <input type="text"
+                                                                                           class="form-control"
+                                                                                           id="lname"
+                                                                                           value="李白" v-model="emp.name">
+                                                                                </div>
+                                                                                <div class="form-group col-sm-6">
+                                                                                    <label for="uname">部门编号:</label>
+                                                                                    <input type="text"
+                                                                                           class="form-control"
+                                                                                           id="uname"
+                                                                                           value="A1001" v-model="emp.bno">
+                                                                                </div>
+                                                                                <div class="form-group col-sm-6">
+                                                                                    <label for="cname">身份证号:</label>
+                                                                                    <input type="text"
+                                                                                           class="form-control"
+                                                                                           id="cname"
+                                                                                           value="15040320020321512323" v-model="emp.id">
+                                                                                </div>
+                                                                                <div class="form-group col-sm-6">
+                                                                                    <label class="d-block">性别:</label>
+                                                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                                                        <input type="radio"
+                                                                                               id="customRadio6"
+                                                                                               name="customRadio1"
+                                                                                               class="custom-control-input"
+                                                                                               checked="" value="男" v-model="emp.sex">
+                                                                                        <label class="custom-control-label"
+                                                                                               for="customRadio6">
+                                                                                            男</label>
+                                                                                    </div>
+                                                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                                                        <input type="radio"
+                                                                                               id="customRadio7"
+                                                                                               name="customRadio1"
+                                                                                               class="custom-control-input"  value="女" v-model="emp.sex">
+                                                                                        <label class="custom-control-label"
+                                                                                               for="customRadio7" >
+                                                                                            女</label>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group col-sm-6">
+                                                                                    <label for="vname">岗位:</label>
+                                                                                    <input type="text"
+                                                                                           class="form-control"
+                                                                                           id="vname"
+                                                                                           value="经理" v-model="emp.gangWei">
+                                                                                </div>
+                                                                                <div class="form-group col-sm-6">
+                                                                                    <label for="xname">职称:</label>
+                                                                                    <input type="text"
+                                                                                           class="form-control"
+                                                                                           id="xname"
+                                                                                           value="高级设计师" v-model="emp.zhiCheng">
+                                                                                </div>
+                                                                                <div class="form-group col-sm-6">
+                                                                                    <label for="dob">参加工作时间:</label>
+                                                                                    <input class="form-control"
+                                                                                           id="dob"
+                                                                                           value="1984-01-24" v-model="emp.workDate">
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </form>
+                                                                    </div>
+                                                                </section>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                        data-dismiss="modal">关闭
+                                                                </button>
+                                                                <button type="button" class="btn btn-primary" @click="addEmployee">保存
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid" aria-describedby="user-list-page-info">
+                                <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid"
+                                       aria-describedby="user-list-page-info">
                                     <thead>
                                     <tr>
                                         <th>员工照片</th>
@@ -88,57 +191,147 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td class="text-center"><img class="rounded-circle img-fluid avatar-40" src="images/user/01.jpg" alt="profile"></td>
-                                        <td>A001</td>
-                                        <td>李白</td>
-                                        <td>后勤部</td>
-                                        <td>15465485236985144</td>
-                                        <td>男</td>
-                                        <td>经理</td>
-                                        <td><span class="badge iq-bg-primary">高级设计师</span></td>
-                                        <td>2019/12/01</td>
+                                    <tr v-for="(item,index) in employee" :key="index">
+                                        <td class="text-center"><img class="rounded-circle img-fluid avatar-40"
+                                                                     src="images/user/01.jpg" alt="profile"></td>
+                                        <td>{{item.yno}}</td>
+                                        <td>{{item.name}}</td>
+                                        <td>{{item.f_bname}}</td>
+                                        <td>{{item.id}}</td>
+                                        <td>{{item.sex}}</td>
+                                        <td>{{item.gangWei}}</td>
+                                        <td><span class="badge iq-bg-primary">{{item.zhiCheng}}</span></td>
+                                        <td>{{item.workDate}}</td>
                                         <td>
+                                            <div class="bootstrap-modal">
                                             <div class="flex align-items-center list-user-action">
-                                                <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="详细信息" href="#"><i class="ri-user-add-line"></i></a>
-                                                <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="修改" href="#"><i class="ri-pencil-line"></i></a>
-                                                <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="删除" href="#"><i class="ri-delete-bin-line"></i></a>
+                                                <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top"
+                                                   title="" data-original-title="详细信息" @click="redirectToUser(item.yno)"><i
+                                                        class="ri-user-add-line"></i></a>
+
+                                                <a class="iq-bg-primary" title="" data-original-title="修改" data-toggle="modal" data-target="#updateModal"><i
+                                                        class="ri-pencil-line"></i></a>
+                                                    <div class="modal fade col-lg-12" id="updateModal">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title">修改员工信息</h5>
+                                                                    <button type="button" class="close"
+                                                                            data-dismiss="modal"><span>&times;</span>
+                                                                    </button>
+                                                                </div>
+
+                                                                <div class="modal-body">
+                                                                    <section>
+                                                                        <div>
+                                                                            <form>
+                                                                                <div class="form-group row align-items-center">
+                                                                                    <div class="col-md-12">
+                                                                                        <div class="profile-img-edit">
+                                                                                            <img class="profile-pic"
+                                                                                                 src="images/user/11.png"
+                                                                                                 alt="profile-pic">
+                                                                                            <div class="p-image">
+                                                                                                <i class="ri-pencil-line upload-button"></i>
+                                                                                                <input class="file-upload"
+                                                                                                       type="file"
+                                                                                                       accept="image/*"/>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class=" row align-items-center">
+                                                                                    <div class="form-group col-sm-6">
+                                                                                        <label for="qname">员工编号:</label>
+                                                                                        <input type="text"
+                                                                                               class="form-control"
+                                                                                               id="qname"
+                                                                                               value="A001" v-model="emp.yno">
+                                                                                    </div>
+                                                                                    <div class="form-group col-sm-6">
+                                                                                        <label for="pname">员工姓名:</label>
+                                                                                        <input type="text"
+                                                                                               class="form-control"
+                                                                                               id="pname"
+                                                                                               value="李白" v-model="emp.name">
+                                                                                    </div>
+                                                                                    <div class="form-group col-sm-6">
+                                                                                        <label for="kname">部门编号:</label>
+                                                                                        <input type="text"
+                                                                                               class="form-control"
+                                                                                               id="kname"
+                                                                                               value="A1001" v-model="emp.bno">
+                                                                                    </div>
+                                                                                    <div class="form-group col-sm-6">
+                                                                                        <label for="jkname">身份证号:</label>
+                                                                                        <input type="text"
+                                                                                               class="form-control"
+                                                                                               id="jkname"
+                                                                                               value="15040320020321512323" v-model="emp.id">
+                                                                                    </div>
+                                                                                    <div class="form-group col-sm-6">
+                                                                                        <label class="d-block">性别:</label>
+                                                                                        <div class="custom-control custom-radio custom-control-inline">
+                                                                                            <input type="radio"
+                                                                                                   id="ustomRadio6"
+                                                                                                   name="customRadio1"
+                                                                                                   class="custom-control-input"
+                                                                                                   checked="" value="男" v-model="emp.sex">
+                                                                                            <label class="custom-control-label"
+                                                                                                   for="ustomRadio6" >
+                                                                                                男</label>
+                                                                                        </div>
+                                                                                        <div class="custom-control custom-radio custom-control-inline">
+                                                                                            <input type="radio"
+                                                                                                   id="ustomRadio7"
+                                                                                                   name="customRadio1"
+                                                                                                   class="custom-control-input" value="女" v-model="emp.sex">
+                                                                                            <label class="custom-control-label"
+                                                                                                   for="ustomRadio7">
+                                                                                                女</label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group col-sm-6">
+                                                                                        <label for="vame">岗位:</label>
+                                                                                        <input type="text"
+                                                                                               class="form-control"
+                                                                                               id="vame"
+                                                                                               value="经理" v-model="emp.gangWei">
+                                                                                    </div>
+                                                                                    <div class="form-group col-sm-6">
+                                                                                        <label for="xame">职称:</label>
+                                                                                        <input type="text"
+                                                                                               class="form-control"
+                                                                                               id="xame"
+                                                                                               value="高级设计师" v-model="emp.zhiCheng">
+                                                                                    </div>
+                                                                                    <div class="form-group col-sm-6">
+                                                                                        <label for="db">参加工作时间:</label>
+                                                                                        <input class="form-control"
+                                                                                               id="db"
+                                                                                               value="1984-01-24" v-model="emp.workDate">
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </form>
+                                                                        </div>
+                                                                    </section>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                            data-dismiss="modal">关闭
+                                                                    </button>
+                                                                    <button type="button" class="btn btn-primary" @click="updateEmployee(item.yno)">保存
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+
+                                                    </div>
+                                                </div>
+                                                <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top"
+                                                   title="" data-original-title="删除" @click="deleteEmployee(item.yno)"><i
+                                                        class="ri-delete-bin-line"></i></a>
                                             </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center"><img class="rounded-circle img-fluid avatar-40" src="images/user/02.jpg" alt="profile"></td>
-                                        <td>A001</td>
-                                        <td>李白</td>
-                                        <td>后勤部</td>
-                                        <td>15465485236985144</td>
-                                        <td>男</td>
-                                        <td>经理</td>
-                                        <td><span class="badge iq-bg-primary">高级设计师</span></td>
-                                        <td>2019/12/01</td>
-                                        <td>
-                                            <div class="flex align-items-center list-user-action">
-                                                <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="详细信息" href="#"><i class="ri-user-add-line"></i></a>
-                                                <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="修改" href="#"><i class="ri-pencil-line"></i></a>
-                                                <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="删除" href="#"><i class="ri-delete-bin-line"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center"><img class="rounded-circle img-fluid avatar-40" src="images/user/03.jpg" alt="profile"></td>
-                                        <td>A001</td>
-                                        <td>李白</td>
-                                        <td>后勤部</td>
-                                        <td>15465485236985144</td>
-                                        <td>男</td>
-                                        <td>经理</td>
-                                        <td><span class="badge iq-bg-primary">高级设计师</span></td>
-                                        <td>2019/12/01</td>
-                                        <td>
-                                            <div class="flex align-items-center list-user-action">
-                                                <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="详细信息" href="#"><i class="ri-user-add-line"></i></a>
-                                                <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="修改" href="#"><i class="ri-pencil-line"></i></a>
-                                                <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="删除" href="#"><i class="ri-delete-bin-line"></i></a>
                                             </div>
                                         </td>
                                     </tr>
@@ -183,5 +376,130 @@
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
 <div th:replace="~{commons/commons::js}"></div>
+
+<script>
+    new Vue({
+        el: "#employ",
+        mounted() {
+            this.getEmployee();
+        },
+        data() {
+            return {
+                search:{
+                    hun:'',
+                    xue:'',
+                    gang:'',
+                    std:''
+                },
+                emp: {
+                    yno: '',
+                    bno: '',
+                    f_bname: '',
+                    id: '',
+                    name: '',
+                    sex: '',
+                    gangWei: '',
+                    zhiCheng: '',
+                    workDate: '',
+                    ynos:''
+                },
+                employee: {
+                    yno: '',
+                    bno: '',
+                    f_bname: '',
+                    id: '',
+                    name: '',
+                    sex: '',
+                    gangWei: '',
+                    zhiCheng: '',
+                    workDate: '',
+                    ynos:''
+                }
+            }
+        },
+        methods: {
+            getEmployee() {
+                axios({
+                    method: "get",
+                    url: "http://localhost:8080/employee/query",
+                }).then(resp => {
+                    console.log(resp.data);
+                    this.employee = resp.data;
+                })
+            },
+            addEmployee() {
+                axios({
+                    method: "post",
+                    url: "http://localhost:8080/employee/add",
+                    data: this.emp
+                }).then(resp => {
+                    console.log(resp.data);
+                    if (resp.data === "success" ){
+                        alert("添加成功");
+                        this.getEmployee();
+                    } else {
+                        alert("添加失败");
+                    }
+                })
+            },
+            updateEmployee(yno) {
+                this.emp.ynos = yno;
+                console.log(this.emp)
+                axios({
+                    method: "post",
+                    url: "http://localhost:8080/employee/update",
+                    data: this.emp
+                }).then(resp => {
+                    console.log(resp.data);
+                    if (resp.data === "success" ){
+                        alert("修改成功");
+                        this.getEmployee();
+                    } else {
+                        alert("修改失败");
+                    }
+                })
+            },
+            deleteEmployee(yno) {
+                this.employee.yno = yno;
+                axios({
+                    method: "post",
+                    url: "http://localhost:8080/employee/delete?yno=" + yno,
+                    data: this.employee
+                }).then(resp => {
+                    if (resp.data === "success" ){
+                        alert("删除成功");
+                        this.getEmployee();
+                    } else {
+                        alert("删除失败");
+                    }
+                })
+            },
+            redirectToUser(yno){
+                axios({
+                    method: "post",
+                    url: "http://localhost:8080/employee/redirect/?yno=" + yno,
+                    data: this.employee
+                }).then(resp => {
+                    if (resp.data === "success"){
+                        window.location.href="http://localhost:8080/viewEmployee?yno="+yno;
+                    } else {
+                        alert("跳转失败");
+                    }
+                })
+            },
+            searchStd() {
+                axios({
+                    method: "post",
+                    url: "http://localhost:8080/user/std/selectByStdId?stdId=" + this.std.stdId,
+                    data: this.std
+                }).then(resp => {
+                    this.stds = [];
+                    this.stds.push(resp.data);
+                    alert("查询成功")
+                })
+            },
+        }
+    })
+</script>
 </body>
 </html>

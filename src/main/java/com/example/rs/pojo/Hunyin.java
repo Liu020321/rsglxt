@@ -14,4 +14,5 @@ public class Hunyin {
     String memoryDate;
     String kids;
     String wifeWork;
+    String ynos;
 }

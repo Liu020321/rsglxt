@@ -1,13 +1,10 @@
 ﻿<!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head >
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>部门信息</title>
-
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <!-- Favicon -->
     <link rel="shortcut icon" th:href="@{images/favicon.ico}"/>
@@ -30,14 +27,14 @@
 <!-- Wrapper Start -->
 <div class="wrapper">
     <!-- Sidebar  -->
-    <div th:replace="~{commons/commons::sidebar}"></div>
+    <div th:replace="~{commons/commons::sidebar(active1='de',active2='department.html')}"></div>
     <!-- TOP Nav Bar -->
     <div th:replace="~{commons/commons::topnavbar}"></div>
     <!-- TOP Nav Bar END -->
     <!-- Responsive Breadcrumb End-->
     <!-- Page Content  -->
     <div id="content-page" class="content-page">
-        <div class="container-fluid">
+        <div class="container-fluid" id="depart">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="iq-card">
@@ -48,38 +45,120 @@
                         </div>
                         <div class="iq-card-body">
                             <div id="table" class="table-editable">
-                           <span class="table-add float-right mb-3 mr-2">
-                              <button class="btn btn-sm iq-bg-success"><i
-                                      class="ri-add-fill"><span class="pl-1">添加部门</span></i>
-                              </button>
-                           </span>
+                                <div class="bootstrap-modal">
+                             <span class="table-add float-right mb-3 mr-2">
+                                <button class="btn btn-sm iq-bg-success" data-toggle="modal"
+                                        data-target="#basicModal"><i
+                                        class="ri-add-fill"><span class="pl-1">添加部门</span></i>
+                                </button>
+                             </span>
+
+                                    <div class="modal fade" id="basicModal">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">添加部门信息</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                    </button>
+                                                </div>
+
+                                                <div class="modal-body">
+                                                    <section>
+                                                        <div class="iq-card-body">
+                                                            <form class="needs-validation">
+                                                                <div class="form-row">
+                                                                    <div class="col-md-6 mb-6">
+                                                                        <label for="validationTooltip01">部门编号</label>
+                                                                        <input type="text" class="form-control" id="validationTooltip01" v-model="departmentObj.bno" required >
+                                                                    </div>
+                                                                    <div class="col-md-6 mb-6">
+                                                                        <label for="validationTooltip02">部门名称</label>
+                                                                        <input type="text" class="form-control" id="validationTooltip02" v-model="departmentObj.bname" required >
+                                                                    </div>
+                                                                    <div class="col-md-6 mb-6">
+                                                                        <label for="validationTooltip03">负责人</label>
+                                                                        <input type="text" class="form-control" id="validationTooltip03" v-model="departmentObj.fuzeren" required >
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭
+                                                    </button>
+                                                    <button type="button" class="btn btn-primary" @click="addDepart">保存</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <table class="table table-bordered table-responsive-md table-striped text-center">
                                     <thead>
                                     <tr>
                                         <th>部门编号</th>
                                         <th>部门名称</th>
                                         <th>部门负责人</th>
-                                        <th>顺序</th>
-                                        <th>修改</th>
-                                        <th>删除</th>
+                                        <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td contenteditable="true">A1001</td>
-                                        <td contenteditable="true">后勤部</td>
-                                        <td contenteditable="true">李白</td>
+                                    <tr v-for="(item,index) in department" :key="index">
+                                        <td contenteditable="true">{{item.bno}}</td>
+                                        <td contenteditable="true">{{item.bname}}</td>
+                                        <td contenteditable="true">{{item.fuzeren}}</td>
                                         <td>
-                                            <span class="table-up"><a href="#!" class="indigo-text"><i class="fa fa-long-arrow-up" aria-hidden="true"></i></a></span>
-                                            <span class="table-down"><a href="#!" class="indigo-text"><i class="fa fa-long-arrow-down" aria-hidden="true"></i></a></span>
-                                        </td>
-                                        <td>
-                                   <span class="table-remove"><button type="button"
-                                                                      class="btn iq-bg-info btn-rounded btn-sm my-0">修改</button></span>
-                                        </td>
-                                        <td>
-                                   <span class="table-remove"><button type="button"
-                                                                      class="btn iq-bg-danger btn-rounded btn-sm my-0">删除</button></span>
+                                            <div class="bootstrap-modal">
+                                            <span class="table-remove">
+                                            <button type="button"
+                                                    class="btn iq-bg-info btn-rounded btn-sm my-0" data-toggle="modal"
+                                                    data-target="#updateModal">修改</button>
+                                                <div class="modal fade" id="updateModal">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">修改部门信息</h5>
+                                                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                                </button>
+                                                            </div>
+
+                                                            <div class="modal-body">
+                                                                <section>
+                                                                    <div class="iq-card-body">
+                                                                        <form class="needs-validation">
+                                                                            <div class="form-row">
+                                                                                <div class="col-md-6 mb-6">
+                                                                                    <label for="validationTooltip04">部门编号</label>
+                                                                                    <input type="text" class="form-control" id="validationTooltip04" v-model="departmentObj.bno" required >
+                                                                                </div>
+                                                                                <div class="col-md-6 mb-6">
+                                                                                    <label for="validationTooltip05">部门名称</label>
+                                                                                    <input type="text" class="form-control" id="validationTooltip05" v-model="departmentObj.bname" required >
+                                                                                </div>
+                                                                                <div class="col-md-6 mb-6">
+                                                                                    <label for="validationTooltip06">负责人</label>
+                                                                                    <input type="text" class="form-control" id="validationTooltip06" v-model="departmentObj.fuzeren" required >
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </section>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭
+                                                                </button>
+                                                                <button type="button" class="btn btn-primary" @click="updateDepart(item.bno)">保存</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            <button type="button"
+                                                    class="btn iq-bg-danger btn-rounded btn-sm my-0" @click="deleteDepart(item.bno)">删除
+                                            </button>
+                                              </span>
+                                            </div>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -98,7 +177,86 @@
 <!-- Footer END -->
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-
+<!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>-->
 <div th:replace="~{commons/commons::js}"></div>
+
+<script>
+    new Vue({
+        el: "#depart",
+        mounted() {
+            this.getDepartment();
+        },
+        data() {
+            return {
+                departmentObj:{
+                    bno: '',
+                    bname: '',
+                    fuzeren: '',
+                    bnos:''
+                },
+
+                department: {
+                    bno: '',
+                    bname: '',
+                    fuzeren: '',
+                    bnos:''
+                }
+            }
+        },
+        methods: {
+            getDepartment() {
+                axios({
+                    method: "get",
+                    url: "http://localhost:8080/department/query",
+                }).then(resp => {
+                    // console.log(resp.data);
+                    this.department = resp.data;
+                })
+            },
+            addDepart() {
+
+                axios({
+                    method: "post",
+                    url: "http://localhost:8080/department/add",
+                    data: this.departmentObj
+                }).then(resp => {
+                    if (resp.data === "success") {
+                        alert("添加成功")
+                        window.location.reload();
+                    }
+
+                })
+            },
+            deleteDepart(bno) {
+                this.department.bno = bno;
+                axios({
+                    method: "post",
+                    url: "http://localhost:8080/department/delete?bno=" + bno,
+                    data: this.department
+                }).then(resp => {
+                    if (resp.data === "success") {
+                        alert("删除成功")
+                        window.location.reload();
+                    }
+                })
+
+            },
+            updateDepart(bno) {
+                this.departmentObj.bnos = bno;
+                axios({
+                    method: "post",
+                    url: "http://localhost:8080/department/update",
+                    data: this.departmentObj
+                }).then(resp => {
+                    if (resp.data === "success") {
+                        alert("修改成功")
+                        window.location.reload();
+                    }
+                })
+            },
+        }
+    })
+</script>
 </body>
 </html>

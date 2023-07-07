@@ -85,61 +85,15 @@
                     <a href="#" class="search-toggle iq-waves-effect d-flex align-items-center bg-primary rounded">
                         <img th:src="@{images/user/1.jpg}" class="img-fluid rounded mr-3" alt="user">
                         <div class="caption">
-                            <h6 class="mb-0 line-height text-white">Nik jone</h6>
-                            <span class="font-size-12 text-white">Available</span>
+                            <h6 class="mb-0 line-height text-white">你好</h6>
                         </div>
                     </a>
                     <div class="iq-sub-dropdown iq-user-dropdown">
                         <div class="iq-card shadow-none m-0">
                             <div class="iq-card-body p-0 ">
                                 <div class="bg-primary p-3">
-                                    <h5 class="mb-0 text-white line-height">Hello Nik jone</h5>
-                                    <span class="text-white font-size-12">Available</span>
+                                    <h5 class="mb-0 text-white line-height">你好</h5>
                                 </div>
-                                <a href="profile.html" class="iq-sub-card iq-bg-primary-hover">
-                                    <div class="media align-items-center">
-                                        <div class="rounded iq-card-icon iq-bg-primary">
-                                            <i class="ri-file-user-line"></i>
-                                        </div>
-                                        <div class="media-body ml-3">
-                                            <h6 class="mb-0 ">My Profile</h6>
-                                            <p class="mb-0 font-size-12">View personal profile details.</p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="profile-edit.html" class="iq-sub-card iq-bg-primary-hover">
-                                    <div class="media align-items-center">
-                                        <div class="rounded iq-card-icon iq-bg-primary">
-                                            <i class="ri-profile-line"></i>
-                                        </div>
-                                        <div class="media-body ml-3">
-                                            <h6 class="mb-0 ">Edit Profile</h6>
-                                            <p class="mb-0 font-size-12">Modify your personal details.</p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="account-setting.html" class="iq-sub-card iq-bg-primary-hover">
-                                    <div class="media align-items-center">
-                                        <div class="rounded iq-card-icon iq-bg-primary">
-                                            <i class="ri-account-box-line"></i>
-                                        </div>
-                                        <div class="media-body ml-3">
-                                            <h6 class="mb-0 ">Account settings</h6>
-                                            <p class="mb-0 font-size-12">Manage your account parameters.</p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="privacy-setting.html" class="iq-sub-card iq-bg-primary-hover">
-                                    <div class="media align-items-center">
-                                        <div class="rounded iq-card-icon iq-bg-primary">
-                                            <i class="ri-lock-line"></i>
-                                        </div>
-                                        <div class="media-body ml-3">
-                                            <h6 class="mb-0 ">Privacy Settings</h6>
-                                            <p class="mb-0 font-size-12">Control your privacy parameters.</p>
-                                        </div>
-                                    </div>
-                                </a>
                                 <div class="d-inline-block w-100 text-center p-3">
                                     <a class="bg-primary iq-sign-btn" th:href="@{/login}" role="button">登出<i class="ri-login-box-line ml-2"></i></a>
                                 </div>
@@ -174,34 +128,30 @@
     <div id="sidebar-scrollbar">
         <nav class="iq-sidebar-menu">
             <ul id="iq-sidebar-toggle" class="iq-menu">
-                <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>面板</span></li>
-                <li>
-                    <a th:href="@{index.html}" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>首页</span></a>
-                </li>
                 <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>相关信息</span></li>
-                <li th:class="${active1=='yiliao'?'active':''}">
+                <li th:class="${active1=='de'?'active':''}">
                     <a href="#userinfo" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-user-line"></i><span>信息展示</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                     <ul id="userinfo" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                        <li><a th:href="@{department}"><i class="ri-profile-line"></i>部门信息</a></li>
-                        <li ><a th:href="@{employee}"><i class="ri-file-edit-line"></i>员工信息</a></li>
+                        <li th:class="${active2=='department.html'?'active':''}"><a th:href="@{department}"><i class="ri-profile-line"></i>部门信息</a></li>
+                        <li  th:class="${active2=='employee.html'?'active':''}"><a th:href="@{employee}"><i class="ri-file-edit-line"></i>员工信息</a></li>
                     </ul>
                 </li>
-                <li>
+                <li th:class="${active1=='se'?'active':''}">
                     <a href="#mailbox" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-mail-line"></i><span>信息操作</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                     <ul id="mailbox" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                        <li><a th:href="@{viewEmployee}"><i class="ri-inbox-line"></i>员工信息操作</a></li>
-                        <li><a th:href="@{transfer}"><i class="ri-edit-line"></i>人员调动</a></li>
+                        <li th:class="${active2=='search.html'?'active':''}"><a th:href="@{search}"><i class="ri-inbox-line"></i>员工搜索</a></li>
+                        <li th:class="${active2=='diaodong.html'?'active':''}"><a th:href="@{transfer}"><i class="ri-edit-line"></i>人员调动</a></li>
                     </ul>
                 </li>
                 <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>其他操作</span></li>
-                <li>
-                    <a href="#ui-elements" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-pencil-ruler-line"></i><span>账户管理</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                    <ul id="ui-elements" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                        <li><a th:href="@{viewUser}"><i class="ri-font-color"></i>查看用户</a></li>
-                        <li><a th:href="@{changeUser}"><i class="ri-text"></i>修改密码</a></li>
-                        <li><a th:href="@{admin}"><i class="ri-alert-line"></i>管理员操作</a></li>
-                    </ul>
-                </li>
+<!--                <li>-->
+<!--                    <a href="#ui-elements" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-pencil-ruler-line"></i><span>账户管理</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>-->
+<!--                    <ul id="ui-elements" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">-->
+<!--                        <li><a th:href="@{viewUser}"><i class="ri-font-color"></i>查看用户</a></li>-->
+<!--                        <li><a th:href="@{changeUser}"><i class="ri-text"></i>修改密码</a></li>-->
+<!--                        <li><a th:href="@{admin}"><i class="ri-alert-line"></i>管理员操作</a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
             </ul>
         </nav>
         <div class="p-3"></div>
@@ -230,6 +180,8 @@
 
 <!--js代码-->
 <div th:fragment="js">
+    <script th:src="@{js/vue.js}"></script>
+    <script th:src="@{js/axios.js}"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script th:src="@{js/jquery.min.js}"></script>
     <script th:src="@{js/popper.min.js}"></script>

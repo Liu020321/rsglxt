@@ -15,19 +15,77 @@
         <result property="workDate" column="F_canjiagongzuoshijian"/>
     </resultMap>
 
-    <!--    <select id="queryUser" resultMap="userResultMap">-->
-    <!--        select  * from tb_user where user_name = #{userName} and password = #{password}-->
-    <!--    </select>-->
+    <select id="queryEmployee" resultMap="employeeResultMap">
+        SELECT t_yuangong.F_yno,
+               t_department.F_bname,
+               t_yuangong.F_id,
+               t_yuangong.F_yname,
+               t_yuangong.F_sex,
+               t_yuangong.F_gangwei,
+               t_yuangong.F_zhicheng,
+               t_yuangong.F_canjiagongzuoshijian
+        FROM t_yuangong
+                 JOIN t_department ON t_yuangong.F_bno = t_department.F_bno;
+    </select>
 
-    <!--    <insert id="addUser" parameterType="User">-->
-    <!--        insert into tb_user(user_name, password, status) values(#{userName}, #{password}, #{status})-->
-    <!--    </insert>-->
+    <insert id="addEmployee" parameterType="Employee">
+        insert into rsglxt.t_yuangong(t_yuangong.F_yno, t_yuangong.F_bno, t_yuangong.F_id, t_yuangong.F_yname, t_yuangong.F_sex, t_yuangong.F_gangwei, t_yuangong.F_zhicheng, t_yuangong.F_canjiagongzuoshijian) values (#{yno},#{bno},#{id},#{name},#{sex},#{gangWei},#{zhiCheng},#{workDate})
+    </insert>
 
-    <!--    <update id="updateUser" parameterType="User">-->
-    <!--        update tb_user set user_name = #{userName}, password = #{password}, status = #{status} where id = #{id}-->
-    <!--    </update>-->
 
-    <!--    <delete id="deleteUserById" parameterType="User">-->
-    <!--        delete from tb_user where id = #{id}-->
-    <!--    </delete>-->
+    <update id="updateEmployee" parameterType="Employee">
+        update rsglxt.t_yuangong set t_yuangong.F_yno=#{yno},F_bno=#{bno},F_id=#{id},F_yname=#{name},F_sex=#{sex},F_gangwei=#{gangWei},F_zhicheng=#{zhiCheng},F_canjiagongzuoshijian=#{workDate} where t_yuangong.F_yno=#{ynos}
+    </update>
+
+    <delete id="deleteEmployee" parameterType="Employee">
+        delete from rsglxt.t_yuangong where t_yuangong.F_yno=#{yno}
+    </delete>
+
+    <select id="searchXue" resultMap="employeeResultMap">
+        SELECT t_yuangong.F_yno,
+               t_department.F_bname,
+               t_yuangong.F_id,
+               t_yuangong.F_yname,
+               t_yuangong.F_sex,
+               t_yuangong.F_gangwei,
+               t_yuangong.F_zhicheng,
+               t_yuangong.F_canjiagongzuoshijian
+        FROM rsglxt.t_yuangong
+                 JOIN rsglxt.t_xueli ON t_yuangong.F_yno = t_xueli.F_yno
+                 JOIN t_department ON t_yuangong.F_bno = t_department.F_bno
+        WHERE t_xueli.F_xueli = #{xueli}
+    </select>
+
+    <select id="searchHun" resultMap="employeeResultMap">
+        SELECT t_yuangong.F_yno,
+               t_department.F_bname,
+               t_yuangong.F_id,
+               t_yuangong.F_yname,
+               t_yuangong.F_sex,
+               t_yuangong.F_gangwei,
+               t_yuangong.F_zhicheng,
+               t_yuangong.F_canjiagongzuoshijian
+        FROM rsglxt.t_yuangong
+                 JOIN rsglxt.t_hunyin ON t_yuangong.F_yno = t_hunyin.F_yno
+                 JOIN t_department ON t_yuangong.F_bno = t_department.F_bno
+        WHERE t_hunyin.F_hunyinzhuangkuang = #{hunyin}
+    </select>
+    <select id="searchGang" resultMap="employeeResultMap">
+        SELECT t_yuangong.F_yno,
+               t_department.F_bname,
+               t_yuangong.F_id,
+               t_yuangong.F_yname,
+               t_yuangong.F_sex,
+               t_yuangong.F_gangwei,
+               t_yuangong.F_zhicheng,
+               t_yuangong.F_canjiagongzuoshijian
+        FROM rsglxt.t_yuangong
+                 JOIN t_department ON t_yuangong.F_bno = t_department.F_bno
+        WHERE t_yuangong.F_gangwei = #{gangwei}
+    </select>
+
+    <select id="selectById" resultMap="employeeResultMap">
+        select * from rsglxt.t_yuangong where t_yuangong.F_yno=#{yno}
+    </select>
+
 </mapper>

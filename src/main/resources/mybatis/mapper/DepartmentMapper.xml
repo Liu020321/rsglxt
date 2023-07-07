@@ -10,16 +10,21 @@
         <result property="fuzeren" column="F_fuzeren"/>
     </resultMap>
 
-        <select id="queryDepartment" resultMap="departmentResultMap">
+    <insert id="addDepartment">
+        insert into t_department(F_bno, F_bname, F_fuzeren)
+        values (#{bno}, #{bname}, #{fuzeren})
+    </insert>
+
+    <select id="queryDepartment" resultMap="departmentResultMap">
             select  * from t_department
         </select>
 
-        <insert id="addDepartment" parameterType="Department">
-            insert into t_department(F_bno, F_bname,F_guzeren) values(#{bno}, #{bname}, #{fuzeren})
-        </insert>
+<!--        <insert id="addDepartment" parameterType="Department">-->
+<!--            insert into t_department(F_bno, F_bname,F_fuzeren) values(#{bno}, #{bname}, #{fuzeren})-->
+<!--        </insert>-->
 
         <update id="updateDepartment" parameterType="Department">
-            update t_department set F_bno = #{bno}, F_bname = #{bname}, F_fuzeren = #{fuzeren} where F_bno = #{bno}
+            update t_department set F_bno = #{bno}, F_bname = #{bname}, F_fuzeren = #{fuzeren} where F_bno = #{bnos}
         </update>
 
         <delete id="deleteDepartment" parameterType="Department">
